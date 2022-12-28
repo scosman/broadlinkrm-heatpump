@@ -1,4 +1,4 @@
-# BroadlinkRM Heatpump/Split-AC IR Codes
+# Broadlink RM Heatpump/Split-AC IR Codes
 
 This project is a repository of IR codes to control mini-split airconditions and/or heatpumps.
 
@@ -6,9 +6,9 @@ Currently I have codes for Fujitsu-Halcyon heatpumps. I plan on adding Mitsubish
 
 These codes work on my model, but your milage may vary.
 
-## BroadlinkRM Accessories JSON
+## Broadlink RM Accessories JSON
 
-The json files in the `Broadlink RM Pro Accessories` directory are designed to be used with the [Homebridge Broadlink RM Pro Plugin](https://github.com/kiwi-cam/homebridge-broadlink-rm#readme) to [Homebridge](https://homebridge.io). This exposes the heatpump as an accessory in HomeKit, and allows you to control it from relatively inexpensive wifi connected IR blasters you can buy online.
+The json files in the `Broadlink RM Pro Accessories` directory are designed to be used with the [Homebridge Broadlink RM Pro Plugin](https://github.com/kiwi-cam/homebridge-broadlink-rm#readme) which is a plugin for [Homebridge](https://homebridge.io). This exposes the heatpump as an accessory in HomeKit, and allows you to control it from relatively inexpensive wifi-connected IR blasters you can buy online.
 
 To use, first setup Homebride and the Broadlink RM Pro Plugin. Then simply copy the json for the appriopiate brand to your accessory list in Homebridge config.
 
