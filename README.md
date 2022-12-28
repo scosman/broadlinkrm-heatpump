@@ -16,7 +16,7 @@ If you have several heatpumps, create several accessories using this json as the
 
 ## Raw Codes
 
-The raw codes are available in CSV files in the subdirectories. These can be used with other IR blasting tools.
+The raw codes are available in CSV files in the `Raw Codes` subdirectory. These can be used with other IR blasting tools.
 
 ## Ruby script
 
