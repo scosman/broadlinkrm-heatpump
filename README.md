@@ -2,7 +2,7 @@
 
 This project is a repository of IR codes to control mini-split airconditions and/or heatpumps.
 
-Currently I have codes for Fujitsu-Halcyon heatpumps. I plan on adding Mitsubishi soon. 
+Currently I have codes for Fujitsu-Halcyon and Mitsubishi heatpumps.
 
 These codes work on my model, but your milage may vary.
 

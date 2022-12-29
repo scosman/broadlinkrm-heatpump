@@ -1,42 +1,58 @@
 require 'csv'
 require 'json'
 
-csv = CSV.read("./heatpumps/heatpump codes.csv")
+def options_from_csv csv
+    options = []
+    csvHeader = csv.first
+    csv.each_with_index do |item, i| 
+        next if i == 0
 
-options = []
-csvHeader = csv.first
+        option = {}
+        csvHeader.each_with_index do |header, ii|
+            option[header] = item[ii]
 
-csv.each_with_index do |item, i| 
-    next if i == 0
-
-    option = {}
-    csvHeader.each_with_index do |header, ii|
-        option[header] = item[ii]
-
-        if header == "Temp"
-            option[header] = item[ii].to_i
+            if header == "Temp"
+                option[header] = item[ii].to_i
+            end
         end
+        options << option
     end
-    options << option
+
+    return options
 end
 
-minCoolTemp = options.select{|o| o["Mode"] == "Cool"}.map{|o| o["Temp"]}.min
-maxCoolTemp = options.select{|o| o["Mode"] == "Cool"}.map{|o| o["Temp"]}.max
-minHeatTemp = options.select{|o| o["Mode"] == "Heat"}.map{|o| o["Temp"]}.min
-maxHeatTemp = options.select{|o| o["Mode"] == "Heat"}.map{|o| o["Temp"]}.max
-
-puts "Heat #{minHeatTemp}-#{maxHeatTemp}, Cool #{minCoolTemp}-#{maxCoolTemp}"
+fujitsuCodesCsv = CSV.read("./heatpumps/Fujitsu-Halcyon-codes.csv")
+mitsubishiCodesCsv = CSV.read("./heatpumps/Mitsubishi-codes.csv")
+mitsubishiOptions = options_from_csv mitsubishiCodesCsv
+fujitsuOptions = options_from_csv fujitsuCodesCsv
 
 broadlinkAccessories = []
 
 heatpumps = [
     {
         'name': 'kitchen heatpump',
-        'macAddr': 'aa:aa:aa:aa:aa:aa' # PUT REAL MAC ADDRESS HERE!
+        'options': fujitsuOptions,
+        'macAddr': '11:11:11:11:11:11' # PUT REAL MAC ADDRESS HERE
     },
     {
-        'name': 'office heatpump',
-        'macAddr': '11:aa:aa:aa:aa:aa' # PUT REAL MAC ADDRESS HERE!
+        'name': 'Office Heatpump',
+        'options': fujitsuOptions,
+        'macAddr': '11:11:11:11:11:11' # PUT REAL MAC ADDRESS HERE
+    },
+    {
+        'name': 'Bedroom Heatpump',
+        'options': fujitsuOptions,
+        'macAddr': '11:11:11:11:11:11' # PUT REAL MAC ADDRESS HERE
+    },
+    {
+        'name': 'Lower Stairs Heatpump',
+        'options': mitsubishiOptions,
+        'macAddr': '11:11:11:11:11:11' # PUT REAL MAC ADDRESS HERE
+    },
+    {
+        'name': 'Upper Stairs Heatpump',
+        'options': mitsubishiOptions,
+        'macAddr': '11:11:11:11:11:11' # PUT REAL MAC ADDRESS HERE
     }
 ]
 
@@ -58,6 +74,13 @@ def dataBlockForMode mode, options
 end
 
 heatpumps.each do |heatpump|
+    options = heatpump[:options]
+    minCoolTemp = options.select{|o| o["Mode"] == "Cool"}.map{|o| o["Temp"]}.min
+    maxCoolTemp = options.select{|o| o["Mode"] == "Cool"}.map{|o| o["Temp"]}.max
+    minHeatTemp = options.select{|o| o["Mode"] == "Heat"}.map{|o| o["Temp"]}.min
+    maxHeatTemp = options.select{|o| o["Mode"] == "Heat"}.map{|o| o["Temp"]}.max
+    puts "#{heatpump[:name]}: Heat #{minHeatTemp}-#{maxHeatTemp}, Cool #{minCoolTemp}-#{maxCoolTemp}"
+
     accessory = {}
     accessory['name'] = heatpump[:name]
     accessory['type'] = 'heater-cooler'
