@@ -6,6 +6,10 @@ Currently I have codes for Fujitsu-Halcyon and Mitsubishi heatpumps.
 
 These codes work on my model, but your milage may vary.
 
+# Checkout ESPHome before using this
+
+I tried a few custom solution using these codes, but I've migrated to using [ESPHome's IR Climate Remote project](https://esphome.io/components/climate/climate_ir.html). I highly recommend it over rolling your own codes. Some soldering required, but it's a fun project, and it can better control fan-speed/angle/etc.
+
 ## Broadlink RM Accessories JSON
 
 The json files in the `Broadlink RM Pro Accessories` directory are designed to be used with the [Homebridge Broadlink RM Pro Plugin](https://github.com/kiwi-cam/homebridge-broadlink-rm#readme) which is a plugin for [Homebridge](https://homebridge.io). This exposes the heatpump as an accessory in HomeKit, and allows you to control it from relatively inexpensive wifi-connected IR blasters you can buy online.
